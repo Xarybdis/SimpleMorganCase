@@ -61,9 +61,11 @@ val networkModule = module(override = true) {
     single {
         get<Retrofit>().create(Api::class.java)
     }
+}
 
-    /**
-     * Provides ViewModel
-     */
+/**
+ * Provides ViewModel
+ */
+val viewModelModule = module(override = true) {
     single { MainViewModel(get()) }
 }
