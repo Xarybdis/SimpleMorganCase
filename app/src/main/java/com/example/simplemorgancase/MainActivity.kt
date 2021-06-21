@@ -60,6 +60,8 @@ class MainActivity : AppCompatActivity() {
                 fetchAlbums()
             } else {
                 albumsRwAdapter.updateList(sharedPrefs.getAlbumsList())
+                albumsList = sharedPrefs.getAlbumsList()
+
             }
         }
     }
@@ -96,12 +98,15 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(input: CharSequence?, start: Int, before: Int, count: Int) {
-                albumsRwAdapter.updateList(albumsList.filter {
-                    it.id.toString().contains(input.toString()) || it.title?.contains(input.toString())!!
-                })
+
             }
 
-            override fun afterTextChanged(s: Editable?) {
+            override fun afterTextChanged(input: Editable?) {
+                albumsRwAdapter.updateList(albumsList.filter {
+                    it.userId.toString().contains(input.toString()) || it.id.toString().contains(input.toString()) || it.title?.contains(
+                        input.toString().toLowerCase()
+                    )!!
+                })
             }
         })
     }
